@@ -22,6 +22,11 @@ public class PlayerController : MonoBehaviour
     {
     // handle move events here - use directional but only handle for movement x
         Vector2 v = value.Get<Vector2>();
+        if (v.x != 0)
+        {
+            Quaternion deltaRotation = Quaternion.Euler(new Vector3(0, 180 - 90 * v.x, 0));
+            rb.rotation = deltaRotation;
+        }
         movementX = v.x;
         movementY = v.y;
     }
@@ -52,9 +57,10 @@ public class PlayerController : MonoBehaviour
     {
 		Vector3 movement = new Vector3(movementX, 0.0f, movementY);
 		rb.AddForce(movement * speed);
+
         if (transform.position.y < -2)
         {
-            rb.position = new Vector3(0, 0, 0);
+            rb.position = new Vector3(0, 2, 0);
             rb.velocity = new Vector3(0, 0, 0);
         }
         
@@ -65,6 +71,7 @@ public class PlayerController : MonoBehaviour
         // bool hasVerticalInput = !Mathf.Approximately(vertical, 0f);
         // bool isWalking = hasHorizontalInput || hasVerticalInput;
         bool walk = movementX != 0;
+        if (!canJump) walk = false;
         m_Animator.SetBool("IsWalking",walk);
         Debug.Log(walk);
     }

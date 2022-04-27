@@ -4709,7 +4709,7 @@ SkinnedMeshRenderer:
   m_BlendShapeWeights: []
   m_RootBone: {fileID: 1938559761032081065}
   m_AABB:
-    m_Center: {x: -0.00001700269, y: -0.00018963683, z: 0.00058518327}
+    m_Center: {x: -0.00001700269, y: 0, z: 0.00058518327}
     m_Extent: {x: 0.0040156334, y: 0.010477356, z: 0.0046904413}
   m_DirtyAABB: 0
 --- !u!1 &6676422291128389535
@@ -4761,6 +4761,7 @@ GameObject:
   - component: {fileID: 3806498760415643346}
   - component: {fileID: 2899212822892768191}
   - component: {fileID: 6201136085717800247}
+  - component: {fileID: 4974601988147737181}
   m_Layer: 0
   m_Name: Fighter
   m_TagString: Untagged
@@ -4831,8 +4832,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed9289ba03aceee4d9d9ba9c08377031, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
-  jumpSpeed: 10
+  speed: 2
+  jumpSpeed: 7
 --- !u!54 &2899212822892768191
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4904,6 +4905,20 @@ MonoBehaviour:
   m_DefaultActionMap: PlayerActions
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!136 &4974601988147737181
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6697928338974989309}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 3
+  m_Direction: 2
+  m_Center: {x: 0, y: 0, z: 1.5}
 --- !u!1 &6813566391053642880
 GameObject:
   m_ObjectHideFlags: 0
