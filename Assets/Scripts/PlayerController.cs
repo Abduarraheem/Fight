@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
 	private float movementX;
 	private float movementY;
     private bool canJump;
+    Animator m_Animator;
 
 // handle all player input below //
 
@@ -43,6 +44,7 @@ public class PlayerController : MonoBehaviour
     {
 		rb = GetComponent<Rigidbody>();
         canJump = false;
+        m_Animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -52,9 +54,19 @@ public class PlayerController : MonoBehaviour
 		rb.AddForce(movement * speed);
         if (transform.position.y < -2)
         {
-            rb.position = new Vector3(0, 2, 0);
+            rb.position = new Vector3(0, 0, 0);
             rb.velocity = new Vector3(0, 0, 0);
         }
+        
+        // float horizontal = Input.GetAxis("Horizontal");
+        // float vertical = Input.GetAxis("Vertical");
+        
+        // bool hasHorizontalInput = !Mathf.Approximately(horizontal, 0f);
+        // bool hasVerticalInput = !Mathf.Approximately(vertical, 0f);
+        // bool isWalking = hasHorizontalInput || hasVerticalInput;
+        bool walk = movementX != 0;
+        m_Animator.SetBool("IsWalking",walk);
+        Debug.Log(walk);
     }
 
     // two methods to check if player can jump
