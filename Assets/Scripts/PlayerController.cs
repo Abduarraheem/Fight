@@ -50,6 +50,11 @@ public class PlayerController : MonoBehaviour
     {
 		Vector3 movement = new Vector3(movementX, 0.0f, movementY);
 		rb.AddForce(movement * speed);
+        if (transform.position.y < -2)
+        {
+            rb.position = new Vector3(0, 2, 0);
+            rb.velocity = new Vector3(0, 0, 0);
+        }
     }
 
     // two methods to check if player can jump

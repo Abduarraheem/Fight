@@ -151,7 +151,7 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: c908762c-091b-45cf-92be-8eea57788ca8
     m_ActionName: PlayerActions/Modifier[/Keyboard/leftShift]
-  m_NeverAutoSwitchControlSchemes: 0
+  m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: Keyboard
   m_DefaultActionMap: PlayerActions
   m_SplitScreenIndex: -1
@@ -168,7 +168,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed9289ba03aceee4d9d9ba9c08377031, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
+  speed: 2
   jumpSpeed: 5
 --- !u!54 &1384580305
 Rigidbody:
