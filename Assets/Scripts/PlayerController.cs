@@ -8,12 +8,17 @@ public class PlayerController : MonoBehaviour
 
     public float speed = 1;
     public float jumpSpeed = 10.0f;
+    public CapsuleCollider cc;
+    public LayerMask groundLayers;
+    public float gravityScale = 2;
+
 
     private Vector3 direction;
 	private Rigidbody rb;
 	private float movementX;
 	private float movementY;
     private bool canJump;
+    private int doubleJump;
     Animator m_Animator;
 // handle all player input below //
 
@@ -52,6 +57,8 @@ public class PlayerController : MonoBehaviour
     {
 		rb = GetComponent<Rigidbody>();
         m_Animator = GetComponent<Animator>();
+        cc = GetComponent<CapsuleCollider>();
+
         canJump = false;
     }
 
@@ -60,28 +67,54 @@ public class PlayerController : MonoBehaviour
     {
 		Vector3 movement = new Vector3(movementX, 0.0f, movementY);
 		rb.AddForce(movement * speed);
-
+        
         if (transform.position.y < -2)
         {
             rb.position = new Vector3(0, 2, 0);
             rb.velocity = new Vector3(0, 0, 0);
         }
-        
+
+
         bool walk = movementX != 0;
         if (!canJump) walk = false;
         m_Animator.SetBool("IsWalking",walk);
     }
 
+    void FixedUpdate()
+    {
+
+        Vector3 movement = new Vector3(movementX, 0.0f, movementY);
+
+        rb.AddForce(movement * speed);
+
+        rb.AddForce(Physics.gravity * (gravityScale - 1) * rb.mass);
+
+    }
+
     // two methods to check if player can jump
-	void OnCollisionEnter(Collision collider)
+
+    
+    void OnCollisionEnter(Collision collider)
 	{
+        
 		if (collider.gameObject.CompareTag("Floor"))
 			canJump = true;
+        
     }
 
 	void OnCollisionExit(Collision collider)
 	{
+        
 		if (collider.gameObject.CompareTag("Floor"))
         	canJump = false;
+        
+  
+    }
+    
+
+    private bool IsGround()
+    {
+        return Physics.CheckCapsule(cc.bounds.center, new Vector3(cc.bounds.center.x,
+            cc.bounds.min.y, cc.bounds.center.z), cc.radius * .9f, groundLayers);
     }
 }
