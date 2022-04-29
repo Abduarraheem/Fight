@@ -4838,7 +4838,7 @@ MonoBehaviour:
   groundLayers:
     serializedVersion: 2
     m_Bits: 1
-  gravityScale: 2
+  gravityScale: 1
 --- !u!54 &2899212822892768191
 Rigidbody:
   m_ObjectHideFlags: 0

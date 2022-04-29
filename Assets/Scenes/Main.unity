@@ -422,6 +422,11 @@ PrefabInstance:
       propertyPath: speed
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 3806498760415643346, guid: fa287e56e854a4143b821ee3f3384529,
+        type: 3}
+      propertyPath: groundLayers.m_Bits
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6320805353354166599, guid: fa287e56e854a4143b821ee3f3384529,
         type: 3}
       propertyPath: m_RootOrder
@@ -704,6 +709,11 @@ PrefabInstance:
         type: 3}
       propertyPath: speed
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5507975762162431046, guid: de457b948de83e241b51294f92794f40,
+        type: 3}
+      propertyPath: jumpSpeed
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 5507975762162431046, guid: de457b948de83e241b51294f92794f40,
         type: 3}
