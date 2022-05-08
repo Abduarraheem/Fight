@@ -88,13 +88,10 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            if (Math.Abs(rb.velocity.x) < Math.Abs(movementX * speed) )
-            {
-                rb.AddForce(new Vector3(movementX, 0, 0) * speed * movementInAir);
-            }
-
-
-
+            rb.AddForce(new Vector3(movementX, 0, 0) * speed * movementInAir);
+            int dir = rb.velocity.x > 0 ? 1 : -1;
+            if (Math.Abs(rb.velocity.x) > speed)
+                rb.velocity = new Vector3(speed * dir, rb.velocity.y, rb.velocity.z);
 
         }
            
