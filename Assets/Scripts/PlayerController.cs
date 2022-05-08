@@ -65,8 +65,11 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-		Vector3 movement = new Vector3(movementX, 0.0f, movementY);
-		rb.AddForce(movement * speed);
+        //m_Animator.SetBool("IsWalking",walk);
+    }
+
+    void FixedUpdate()
+    {
         
         if (transform.position.y < -2)
         {
@@ -74,18 +77,10 @@ public class PlayerController : MonoBehaviour
             rb.velocity = new Vector3(0, 0, 0);
         }
 
+		rb.velocity = new Vector3(speed * movementX, rb.velocity.y, 0.0f);
 
         bool walk = movementX != 0;
         if (!canJump) walk = false;
-        //m_Animator.SetBool("IsWalking",walk);
-    }
-
-    void FixedUpdate()
-    {
-
-        Vector3 movement = new Vector3(movementX, 0.0f, movementY);
-
-        rb.AddForce(movement * speed);
 
         rb.AddForce(Physics.gravity * (gravityScale - 1) * rb.mass);
 
