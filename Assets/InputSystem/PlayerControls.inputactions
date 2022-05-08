@@ -87,6 +87,17 @@
                 },
                 {
                     "name": "",
+                    "id": "e78131bd-2e52-4831-8cf7-91cdc3db6a58",
+                    "path": "<Keyboard>/comma",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Player 2",
+                    "action": "Atk1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "ae417a2b-dd72-41f8-a9ca-cef8d0a77637",
                     "path": "<Keyboard>/leftShift",
                     "interactions": "",
@@ -98,11 +109,33 @@
                 },
                 {
                     "name": "",
+                    "id": "103a5c0e-2c44-407f-a612-b64a83e40f66",
+                    "path": "<Keyboard>/period",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Player 2",
+                    "action": "Modifier",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "39cd0951-4eea-4009-bfec-6ea78a4cd064",
                     "path": "<Keyboard>/x",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
+                    "action": "Crouch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "cff45d03-9ea2-432c-994d-79244fc099e3",
+                    "path": "<Keyboard>/m",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Player 2",
                     "action": "Crouch",
                     "isComposite": false,
                     "isPartOfComposite": false

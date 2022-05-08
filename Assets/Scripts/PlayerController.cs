@@ -14,9 +14,6 @@ public class PlayerController : MonoBehaviour
     public float gravityScale = 2;
     public float movementInAir = 0.2f;
 
-
-
-
     private Vector3 direction;
 	private Rigidbody rb;
 	private float movementX;
