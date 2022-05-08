@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System;
 
 public class PlayerController : MonoBehaviour
 {
@@ -11,6 +12,9 @@ public class PlayerController : MonoBehaviour
     public CapsuleCollider cc;
     public LayerMask groundLayers;
     public float gravityScale = 2;
+    public float movementInAir = 0.2f;
+
+
 
 
     private Vector3 direction;
@@ -77,7 +81,26 @@ public class PlayerController : MonoBehaviour
             rb.velocity = new Vector3(0, 0, 0);
         }
 
-		rb.velocity = new Vector3(speed * movementX, rb.velocity.y, 0.0f);
+        float tmpSpeed;
+        if (grounded)
+        {
+            rb.velocity = new Vector3(speed * movementX, rb.velocity.y, 0.0f);
+        }
+        else
+        {
+            if (Math.Abs(rb.velocity.x) < Math.Abs(movementX * speed) )
+            {
+                rb.AddForce(new Vector3(movementX, 0, 0) * speed * movementInAir);
+            }
+
+
+
+
+        }
+           
+        
+        
+		
 
         bool walk = movementX != 0;
         if (!grounded) walk = false;
