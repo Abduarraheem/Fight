@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour
 	private float movementY;
     private bool canJump;
     private int doubleJump;
-    Animator m_Animator;
+    //Animator m_Animator;
 // handle all player input below //
 
     void OnMove(InputValue value)
@@ -48,7 +48,7 @@ public class PlayerController : MonoBehaviour
 
     void OnCrouch()
     {
-        m_Animator.SetTrigger("IsCrouching");
+        //m_Animator.SetTrigger("IsCrouching");
     }
 // player input ends //
 
@@ -56,7 +56,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
 		rb = GetComponent<Rigidbody>();
-        m_Animator = GetComponent<Animator>();
+        //m_Animator = GetComponent<Animator>();
         cc = GetComponent<CapsuleCollider>();
 
         canJump = false;
@@ -77,7 +77,7 @@ public class PlayerController : MonoBehaviour
 
         bool walk = movementX != 0;
         if (!canJump) walk = false;
-        m_Animator.SetBool("IsWalking",walk);
+        //m_Animator.SetBool("IsWalking",walk);
     }
 
     void FixedUpdate()
