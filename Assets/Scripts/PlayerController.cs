@@ -88,16 +88,11 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            rb.AddForce(new Vector3(movementX, 0, 0) * speed * movementInAir);
-            int dir = rb.velocity.x > 0 ? 1 : -1;
-            if (Math.Abs(rb.velocity.x) > speed)
-                rb.velocity = new Vector3(speed * dir, rb.velocity.y, rb.velocity.z);
-
+            int dir = rb.velocity.x > 0 ? 1 : rb.velocity.x < 0 ? -1 : 0;
+            int movementDir = movementX > 0 ? 1 : movementX < 0 ? -1 : 0;
+            if (Math.Abs(rb.velocity.x) < speed || dir != movementDir)
+                rb.AddForce(new Vector3(movementX, 0, 0) * speed * movementInAir);
         }
-           
-        
-        
-		
 
         bool walk = movementX != 0;
         if (!grounded) walk = false;
