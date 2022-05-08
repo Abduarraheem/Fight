@@ -1,0 +1,201 @@
+fileFormatVersion: 2
+guid: 52467a9bb2e967f4e8ec8875bfae8567
+ModelImporter:
+  serializedVersion: 21202
+  internalIDToNameTable:
+  - first:
+      74: -795876870058795885
+    second: IdleToRun
+  - first:
+      74: -3699285245203812260
+    second: kick attack.003
+  - first:
+      74: -1610863427237328480
+    second: Walking
+  - first:
+      74: -2628792425583069633
+    second: metarig|Air Dodge
+  - first:
+      74: -2498288631121493225
+    second: metarig|Back Air
+  - first:
+      74: 5663148252492544847
+    second: metarig|Charge
+  - first:
+      74: 2588239032491914173
+    second: metarig|crouching
+  - first:
+      74: -4100266527320939679
+    second: metarig|crouching to standing
+  - first:
+      74: -5910860247016106330
+    second: metarig|double Jump
+  - first:
+      74: 533500878075344405
+    second: metarig|Down Air
+  - first:
+      74: -802398451158069352
+    second: metarig|forward air
+  - first:
+      74: -3320621685036552024
+    second: metarig|G forward smash
+  - first:
+      74: -6208625933677536349
+    second: metarig|Ground Low Attack
+  - first:
+      74: 3037957382088087021
+    second: metarig|Hit from behind
+  - first:
+      74: -2989004241035439504
+    second: metarig|hit from front
+  - first:
+      74: 3831335388150779191
+    second: metarig|hit to spike
+  - first:
+      74: -710695078948536226
+    second: metarig|holdingledge
+  - first:
+      74: 140166447263791822
+    second: metarig|holdingledge.001
+  - first:
+      74: 2611075726810385300
+    second: metarig|idle
+  - first:
+      74: 5294562436094013605
+    second: metarig|IdleToRun
+  - first:
+      74: 4461225317207373773
+    second: metarig|in air
+  - first:
+      74: -8284908221344111450
+    second: metarig|jump
+  - first:
+      74: 3159919125784611258
+    second: metarig|Land
+  - first:
+      74: -5149128733256851613
+    second: metarig|punch
+  - first:
+      74: -8577492432117613333
+    second: metarig|Roll
+  - first:
+      74: 204377466828913058
+    second: metarig|rotate left to right
+  - first:
+      74: 4921485099953539395
+    second: metarig|rotate right to left
+  - first:
+      74: -5297019649661602221
+    second: metarig|run
+  - first:
+      74: -402328753466479306
+    second: metarig|standing  to crouching
+  - first:
+      74: 2266535563812610608
+    second: metarig|Up Air
+  - first:
+      74: -2893760039483676284
+    second: metarig|up ground
+  - first:
+      74: -4027686426356288868
+    second: metarig|Walking
+  externalObjects: {}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    removeConstantScaleCurves: 1
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    nodeNameCollisionStrategy: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: metarig
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 1
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
