@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
 	private Rigidbody rb;
 	private float movementX;
 	private float movementY;
-    private bool grounde;
+    private bool grounded;
     private int doubleJump;
     //Animator m_Animator;
 // handle all player input below //
@@ -93,8 +93,7 @@ public class PlayerController : MonoBehaviour
 	{
         
 		if (collider.gameObject.CompareTag("Floor"))
-			grounded
- = true;
+			grounded = true;
         
     }
 
@@ -102,8 +101,7 @@ public class PlayerController : MonoBehaviour
 	{
         
 		if (collider.gameObject.CompareTag("Floor"))
-        	grounded
- = false;
+        	grounded = false;
         
   
     }
