@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
 	private Rigidbody rb;
 	private float movementX;
 	private float movementY;
-    private bool canJump;
+    private bool grounde;
     private int doubleJump;
     //Animator m_Animator;
 // handle all player input below //
@@ -37,7 +37,7 @@ public class PlayerController : MonoBehaviour
 
     void OnJump()
     {
-        if (canJump)
+        if (grounded)
             rb.velocity = new Vector3(rb.velocity.x, jumpSpeed, rb.velocity.z);
     }
 
@@ -59,7 +59,7 @@ public class PlayerController : MonoBehaviour
         //m_Animator = GetComponent<Animator>();
         cc = GetComponent<CapsuleCollider>();
 
-        canJump = false;
+        grounded = false;
     }
 
     // Update is called once per frame
@@ -80,7 +80,7 @@ public class PlayerController : MonoBehaviour
 		rb.velocity = new Vector3(speed * movementX, rb.velocity.y, 0.0f);
 
         bool walk = movementX != 0;
-        if (!canJump) walk = false;
+        if (!grounded) walk = false;
 
         rb.AddForce(Physics.gravity * (gravityScale - 1) * rb.mass);
 
@@ -93,7 +93,8 @@ public class PlayerController : MonoBehaviour
 	{
         
 		if (collider.gameObject.CompareTag("Floor"))
-			canJump = true;
+			grounded
+ = true;
         
     }
 
@@ -101,7 +102,8 @@ public class PlayerController : MonoBehaviour
 	{
         
 		if (collider.gameObject.CompareTag("Floor"))
-        	canJump = false;
+        	grounded
+ = false;
         
   
     }
