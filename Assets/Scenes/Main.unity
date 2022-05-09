@@ -448,7 +448,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player1Prefab: {fileID: 7302171180404086601, guid: de457b948de83e241b51294f92794f40,
     type: 3}
-  player2Prefab: {fileID: 6697928338974989309, guid: fa287e56e854a4143b821ee3f3384529,
+  player2Prefab: {fileID: 5017640044200427673, guid: d160e00fe948c854f956ff72a7041bae,
     type: 3}
 --- !u!114 &686474471
 MonoBehaviour:

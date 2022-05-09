@@ -7,12 +7,12 @@ using System;
 public class PlayerController : MonoBehaviour
 {
 
-    public float speed = 1;
-    public float jumpSpeed = 10.0f;
+    public float speed = 10.0f;
+    public float jumpSpeed = 20.0f;
     public CapsuleCollider cc;
     public LayerMask groundLayers;
-    public float gravityScale = 2;
-    public float movementInAir = 0.2f;
+    public float gravityScale = 5.0f;
+    public float movementInAir = 3.0f;
 
     private Vector3 direction;
 	private Rigidbody rb;
@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour
 	private float movementY;
     private bool grounded;
     private int doubleJump;
-    //Animator m_Animator;
+    Animator m_Animator;
 // handle all player input below //
 
     void OnMove(InputValue value)
@@ -57,7 +57,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
 		rb = GetComponent<Rigidbody>();
-        //m_Animator = GetComponent<Animator>();
+        m_Animator = GetComponent<Animator>();
         cc = GetComponent<CapsuleCollider>();
 
         grounded = false;
@@ -66,7 +66,9 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //m_Animator.SetBool("IsWalking",walk);
+        // TODO FIX Z position changing after facing different direction. 
+        // this is a temporary hardcoded fix.
+        transform.position = new Vector3(transform.position.x, transform.position.y, -0.1880001f);
     }
 
     void FixedUpdate()
@@ -93,6 +95,7 @@ public class PlayerController : MonoBehaviour
 
         bool walk = movementX != 0;
         if (!grounded) walk = false;
+        m_Animator.SetBool("IsWalking",walk);
 
         rb.AddForce(Physics.gravity * (gravityScale - 1) * rb.mass);
 
