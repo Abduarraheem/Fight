@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,13 +6,8 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
 
-    public Transform cam;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public GameObject cam;
+    public float zoomLevel;
 
     // Update is called once per frame
     void Update()
@@ -20,6 +16,7 @@ public class CameraController : MonoBehaviour
         float minZ = 0.0f;
         float maxX = 0.0f;
         float maxZ = 0.0f;
+        float zoom = 0.0f;
         GameObject[] foundObjects = GameObject.FindGameObjectsWithTag("Player");
         for (int i = 0; i < foundObjects.Length; i ++)
         {
@@ -31,6 +28,11 @@ public class CameraController : MonoBehaviour
         }
         float centerX = (minX + maxX) / 2;
         float centerZ = (minZ + maxZ) / 2;
-        cam.position = new Vector3(centerX, 6.0f + centerZ, -7.0f);
+        float a = Math.Max(maxX - minX - 10, 0);
+        float b = Math.Max(maxZ - minZ - 10, 0);
+        zoom = (float) Math.Sqrt(a*a + b*b);
+        cam.transform.position = new Vector3(centerX, 6.0f + centerZ, -7.0f);
+        Vector3 FORWARD = cam.transform.TransformDirection(Vector3.forward);
+        cam.transform.localPosition -= FORWARD * zoom * zoomLevel;
     }
 }

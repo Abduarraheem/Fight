@@ -12,7 +12,7 @@ public class OnStart : MonoBehaviour
     void Start()
     {
         PlayerInput.Instantiate(player1Prefab, controlScheme: "Keyboard", pairWithDevice: Keyboard.current);
-        PlayerInput.Instantiate(player2Prefab, controlScheme: "Player 2", pairWithDevice: Keyboard.current);
+        PlayerInput.Instantiate(player1Prefab, controlScheme: "Player 2", pairWithDevice: Keyboard.current);
     }
 
     // Update is called once per frame
