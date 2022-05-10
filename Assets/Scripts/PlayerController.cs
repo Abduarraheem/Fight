@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviour
     private bool doubleJump;
     private bool crouching;
     private bool standing;
+    private bool inContorl;
 
 
     Animator m_Animator;
@@ -33,10 +34,12 @@ public class PlayerController : MonoBehaviour
     {
     // handle move events here - use directional but only handle for movement x
         Vector2 v = value.Get<Vector2>();
-        if (v.x != 0)
+        if (v.x != 0 & grounded)
         {
-            Quaternion deltaRotation = Quaternion.Euler(new Vector3(0, 180 - 90 * v.x, 0));
+            direction = new Vector3(0, 180 - 90 * v.x, 0);
+            Quaternion deltaRotation = Quaternion.Euler(direction);
             rb.rotation = deltaRotation;
+            
         }
         movementX = v.x;
         movementY = v.y;
@@ -94,6 +97,7 @@ public class PlayerController : MonoBehaviour
         standing = true;
         crouching = false;
         grounded = false;
+        inContorl = true;
     }
 
     // Update is called once per frame
