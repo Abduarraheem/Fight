@@ -18,8 +18,14 @@ public class PlayerController : MonoBehaviour
 	private Rigidbody rb;
 	private float movementX;
 	private float movementY;
+
+
     private bool grounded;
     private bool doubleJump;
+    private bool crouching;
+    private bool standing;
+
+
     Animator m_Animator;
 // handle all player input below //
 
@@ -39,9 +45,16 @@ public class PlayerController : MonoBehaviour
     void OnJump()
     {
         if (grounded)
+        {
             rb.velocity = new Vector3(rb.velocity.x, jumpSpeed, rb.velocity.z);
-
-        m_Animator.SetTrigger("IsJumping");
+            m_Animator.SetTrigger("IsJumping");
+        }
+        if (!grounded & doubleJump)
+        {
+            rb.velocity = new Vector3(rb.velocity.x, jumpSpeed, rb.velocity.z);
+            doubleJump = false;
+            m_Animator.SetTrigger("IsDoubleJumping");
+        }
     }
 
     void OnAtk1()
@@ -51,7 +64,16 @@ public class PlayerController : MonoBehaviour
 
     void OnCrouch()
     {
-        m_Animator.SetTrigger("IsCrouching");
+        if (grounded & standing)
+        {
+            m_Animator.SetBool("IsCrouch", true);
+            standing = false;
+        }
+        else if (grounded & !standing)
+        {
+            m_Animator.SetBool("IsCrouch", false);
+            standing = true;
+        }
     }
 // player input ends //
 
@@ -62,6 +84,8 @@ public class PlayerController : MonoBehaviour
         m_Animator = GetComponent<Animator>();
         cc = GetComponent<CapsuleCollider>();
 
+
+        standing = true;
         grounded = false;
     }
 
@@ -86,6 +110,7 @@ public class PlayerController : MonoBehaviour
         if (grounded)
         {
             rb.velocity = new Vector3(speed * movementX, rb.velocity.y, 0.0f);
+            doubleJump = true;
         }
         else
         {
@@ -97,6 +122,7 @@ public class PlayerController : MonoBehaviour
 
         bool walk = movementX != 0;
         if (!grounded) walk = false;
+
         
         m_Animator.SetBool("IsWalking",walk);
 
