@@ -3389,14 +3389,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed9289ba03aceee4d9d9ba9c08377031, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
-  jumpSpeed: 20
+  speed: 9
+  jumpSpeed: 10
   cc: {fileID: 0}
   groundLayers:
     serializedVersion: 2
     m_Bits: 1
-  gravityScale: 5
-  movementInAir: 3
+  gravityScale: 2
+  movementInAir: 1
 --- !u!54 &7998804942064991607
 Rigidbody:
   m_ObjectHideFlags: 0

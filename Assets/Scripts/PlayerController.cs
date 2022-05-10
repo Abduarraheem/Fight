@@ -49,7 +49,7 @@ public class PlayerController : MonoBehaviour
 
     void OnCrouch()
     {
-        //m_Animator.SetTrigger("IsCrouching");
+        m_Animator.SetTrigger("IsCrouching");
     }
 // player input ends //
 
@@ -96,6 +96,7 @@ public class PlayerController : MonoBehaviour
         bool walk = movementX != 0;
         if (!grounded) walk = false;
         m_Animator.SetBool("IsWalking",walk);
+        //m_Animator.SetBool("in air", !walk)
 
         rb.AddForce(Physics.gravity * (gravityScale - 1) * rb.mass);
 
