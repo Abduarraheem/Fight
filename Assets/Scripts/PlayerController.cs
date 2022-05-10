@@ -40,6 +40,8 @@ public class PlayerController : MonoBehaviour
     {
         if (grounded)
             rb.velocity = new Vector3(rb.velocity.x, jumpSpeed, rb.velocity.z);
+
+        m_Animator.SetTrigger("IsJumping");
     }
 
     void OnAtk1()
@@ -95,8 +97,10 @@ public class PlayerController : MonoBehaviour
 
         bool walk = movementX != 0;
         if (!grounded) walk = false;
+        
         m_Animator.SetBool("IsWalking",walk);
-        //m_Animator.SetBool("in air", !walk)
+
+        m_Animator.SetBool("IsInAir", !grounded);
 
         rb.AddForce(Physics.gravity * (gravityScale - 1) * rb.mass);
 
