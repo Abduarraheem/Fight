@@ -59,6 +59,10 @@ public class PlayerController : MonoBehaviour
 
     void OnAtk1()
     {
+        if (!grounded)
+        {
+            m_Animator.SetTrigger("IsAttack");
+        }
 
     }
 
@@ -68,11 +72,13 @@ public class PlayerController : MonoBehaviour
         {
             m_Animator.SetBool("IsCrouch", true);
             standing = false;
+            crouching = true;
         }
         else if (grounded & !standing)
         {
             m_Animator.SetBool("IsCrouch", false);
             standing = true;
+            crouching = false;
         }
     }
 // player input ends //
@@ -86,6 +92,7 @@ public class PlayerController : MonoBehaviour
 
 
         standing = true;
+        crouching = false;
         grounded = false;
     }
 
