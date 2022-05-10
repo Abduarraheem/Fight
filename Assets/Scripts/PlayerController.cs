@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviour
     private bool doubleJump;
     private bool crouching;
     private bool standing;
+    private int dirFacing;
     private bool inContorl;
 
 
@@ -36,8 +37,8 @@ public class PlayerController : MonoBehaviour
         Vector2 v = value.Get<Vector2>();
         if (v.x != 0 & grounded)
         {
-            direction = new Vector3(0, 180 - 90 * v.x, 0);
-            Quaternion deltaRotation = Quaternion.Euler(direction);
+            dirFacing *= -1;
+            Quaternion deltaRotation = Quaternion.Euler(new Vector3(0, 180 - 90 * v.x, 0));
             rb.rotation = deltaRotation;
             
         }
@@ -62,7 +63,7 @@ public class PlayerController : MonoBehaviour
 
     void OnAtk1()
     {
-        if (!grounded)
+        if (!grounded & (movementX* dirFacing > 0))
         {
             m_Animator.SetTrigger("IsAttack");
         }
@@ -98,6 +99,7 @@ public class PlayerController : MonoBehaviour
         crouching = false;
         grounded = false;
         inContorl = true;
+        dirFacing = 1;
     }
 
     // Update is called once per frame
@@ -117,7 +119,6 @@ public class PlayerController : MonoBehaviour
             rb.velocity = new Vector3(0, 0, 0);
         }
 
-        float tmpSpeed;
         if (grounded & !crouching)
         {
             rb.velocity = new Vector3(speed * movementX, rb.velocity.y, 0.0f);
