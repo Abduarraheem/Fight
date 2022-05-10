@@ -44,7 +44,7 @@ public class PlayerController : MonoBehaviour
 
     void OnJump()
     {
-        if (grounded)
+        if (grounded & standing)
         {
             rb.velocity = new Vector3(rb.velocity.x, jumpSpeed, rb.velocity.z);
             m_Animator.SetTrigger("IsJumping");
@@ -101,7 +101,7 @@ public class PlayerController : MonoBehaviour
     {
         // TODO FIX Z position changing after facing different direction. 
         // this is a temporary hardcoded fix.
-        transform.position = new Vector3(transform.position.x, transform.position.y, -0.1880001f);
+        //transform.position = new Vector3(transform.position.x, transform.position.y, -0.1880001f);
     }
 
     void FixedUpdate()
@@ -114,12 +114,12 @@ public class PlayerController : MonoBehaviour
         }
 
         float tmpSpeed;
-        if (grounded)
+        if (grounded & !crouching)
         {
             rb.velocity = new Vector3(speed * movementX, rb.velocity.y, 0.0f);
             doubleJump = true;
         }
-        else
+        else if (!grounded)
         {
             int dir = rb.velocity.x > 0 ? 1 : rb.velocity.x < 0 ? -1 : 0;
             int movementDir = movementX > 0 ? 1 : movementX < 0 ? -1 : 0;
