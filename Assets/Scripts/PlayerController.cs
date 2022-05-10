@@ -107,7 +107,7 @@ public class PlayerController : MonoBehaviour
     {
         // TODO FIX Z position changing after facing different direction. 
         // this is a temporary hardcoded fix.
-        //transform.position = new Vector3(transform.position.x, transform.position.y, -0.1880001f);
+        transform.position = new Vector3(transform.position.x, transform.position.y, -0.1880001f);
     }
 
     void FixedUpdate()
