@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour
 	private float movementX;
 	private float movementY;
     private bool grounded;
-    private int doubleJump;
+    private bool doubleJump;
     Animator m_Animator;
 // handle all player input below //
 
