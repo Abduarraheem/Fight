@@ -9,6 +9,15 @@ public class OnStart : MonoBehaviour
     public GameObject player1Prefab;
     public GameObject player2Prefab;
     public Vector3[] validSpawns;
+
+    // List of material list.
+    [System.Serializable]
+    public class MaterialList
+    {
+        public List<Material> materials;
+    }
+    public List<MaterialList> playerMaterials = new List<MaterialList>();
+
     // Start is called before the first frame update
     void Start()
     {
@@ -18,6 +27,8 @@ public class OnStart : MonoBehaviour
         for (int i = 0; i < foundObjects.Length; i ++)
         {
             foundObjects[i].transform.position = validSpawns[i];
+            GameObject child = foundObjects[i].transform.GetChild(0).gameObject;
+            child.GetComponent<Renderer>().materials = playerMaterials[i].materials.ToArray();
         }
     }
 

@@ -25,13 +25,13 @@ public class PlayerController : MonoBehaviour
     private bool crouching;
     private bool standing;
     private float dirFacing;
-    private bool inContorl;
+    private bool inControl;
     private bool forward;
 
     public List<Collider> BodyParts = new List<Collider>();
 
     Animator m_Animator;
-// handle all player input below //
+    // handle all player input below //
 
     void OnMove(InputValue value)
     {
@@ -138,7 +138,7 @@ public class PlayerController : MonoBehaviour
         standing = true;
         crouching = false;
         grounded = false;
-        inContorl = true;
+        inControl = true;
         dirFacing = 1;
     }
 

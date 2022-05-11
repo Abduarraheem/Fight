@@ -453,6 +453,17 @@ MonoBehaviour:
   validSpawns:
   - {x: -7, y: 0, z: 0}
   - {x: 7, y: 0, z: 0}
+  playerMaterials:
+  - materials:
+    - {fileID: 2100000, guid: 6512b167da601ea43ae9272cb8bbc240, type: 2}
+    - {fileID: 2100000, guid: 15a40301cd54724429d62cacb25a1e47, type: 2}
+    - {fileID: 2100000, guid: 6a8e053d2619d4347b6f8a6ec2113238, type: 2}
+    - {fileID: 2100000, guid: f58d605ae8fcd7240826f847fe5b15d5, type: 2}
+  - materials:
+    - {fileID: 2100000, guid: b414992e2dc0dad45a453228b9fc6e96, type: 2}
+    - {fileID: 2100000, guid: 15a40301cd54724429d62cacb25a1e47, type: 2}
+    - {fileID: 2100000, guid: 6a8e053d2619d4347b6f8a6ec2113238, type: 2}
+    - {fileID: 2100000, guid: f58d605ae8fcd7240826f847fe5b15d5, type: 2}
 --- !u!114 &686474471
 MonoBehaviour:
   m_ObjectHideFlags: 0
