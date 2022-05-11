@@ -145,11 +145,9 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // TODO FIX Z position changing after facing different direction. 
-        // this is a temporary hardcoded fix.
-        transform.position = new Vector3(transform.position.x, transform.position.y, -0.1880001f);
         Quaternion deltaRotation = Quaternion.Euler(new Vector3(0, 180 - 90 * dirFacing, 0));
         rb.rotation = deltaRotation;
+        
     }
 
     void FixedUpdate()

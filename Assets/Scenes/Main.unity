@@ -450,6 +450,9 @@ MonoBehaviour:
     type: 3}
   player2Prefab: {fileID: 5017640044200427673, guid: d160e00fe948c854f956ff72a7041bae,
     type: 3}
+  validSpawns:
+  - {x: -7, y: 0, z: 0}
+  - {x: 7, y: 0, z: 0}
 --- !u!114 &686474471
 MonoBehaviour:
   m_ObjectHideFlags: 0

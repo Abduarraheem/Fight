@@ -142,7 +142,7 @@
                     "name": "",
                     "id": "cff45d03-9ea2-432c-994d-79244fc099e3",
                     "path": "<Keyboard>/downArrow",
-                    "interactions": "",
+                    "interactions": "Press(behavior=2)",
                     "processors": "",
                     "groups": "Player 2",
                     "action": "Crouch",
