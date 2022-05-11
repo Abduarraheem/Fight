@@ -9,10 +9,11 @@ public class PlayerController : MonoBehaviour
 
     public float speed = 10.0f;
     public float jumpSpeed = 20.0f;
-    public CapsuleCollider cc;
-    public LayerMask groundLayers;
     public float gravityScale = 5.0f;
     public float movementInAir = 3.0f;
+    public CapsuleCollider cc;
+    public LayerMask groundLayers;
+    
 
     private Vector3 direction;
 	private Rigidbody rb;
@@ -24,6 +25,8 @@ public class PlayerController : MonoBehaviour
     private bool doubleJump;
     private bool crouching;
     private bool standing;
+    private bool walking;
+    private bool running;
     private float dirFacing;
     private bool inControl;
     private bool forward;
@@ -41,12 +44,18 @@ public class PlayerController : MonoBehaviour
         {
           dirFacing = v.x;
         }
-            
-            
-            
-        
     movementX = v.x;
     movementY = v.y;
+    }
+
+    void OnRun()
+    {
+        if (walking & grounded)
+        {
+            m_Animator.SetBool("IsRunning", true);
+            running = true;
+        }
+
     }
 
     void OnJump()
@@ -60,8 +69,9 @@ public class PlayerController : MonoBehaviour
         {
             rb.velocity = new Vector3(rb.velocity.x, jumpSpeed, rb.velocity.z);
             doubleJump = false;
-            m_Animator.SetTrigger("IsDoubleJumping");
+            m_Animator.SetTrigger("IsJumping");
         }
+
     }
 
     void OnAtk1()
@@ -71,6 +81,18 @@ public class PlayerController : MonoBehaviour
             m_Animator.SetTrigger("IsAttack");
         }
         else if (!grounded & !forward)
+        {
+            m_Animator.SetTrigger("IsAttack");
+        }
+        else if (grounded & crouching)
+        {
+            m_Animator.SetTrigger("IsAttack");
+        }
+        else if (grounded)
+        {
+            m_Animator.SetTrigger("IsAttack");
+        }
+        else if (grounded & walking)
         {
             m_Animator.SetTrigger("IsAttack");
         }
@@ -139,6 +161,8 @@ public class PlayerController : MonoBehaviour
         crouching = false;
         grounded = false;
         inControl = true;
+        walking = false;
+        running = false;
         dirFacing = 1;
     }
 
@@ -172,8 +196,7 @@ public class PlayerController : MonoBehaviour
                 rb.AddForce(new Vector3(movementX, 0, 0) * speed * movementInAir);
         }
 
-        bool walk = movementX != 0;
-        if (!grounded) walk = false;
+        
         if (forward = (movementX * dirFacing > 0))
         {
             m_Animator.SetBool("IsForward", true);
@@ -182,12 +205,21 @@ public class PlayerController : MonoBehaviour
         {
             m_Animator.SetBool("IsForward", false);
         }
+       
+
+        int tmpSpeed = (int)speed;
+        if ((grounded & !walking) | !grounded)
+        {
+            m_Animator.SetBool("IsRunning", false);
+            running = false;
+        }
 
 
 
 
-
-        m_Animator.SetBool("IsWalking",walk);
+        walking = movementX != 0;
+        if (!grounded) walking = false;
+        m_Animator.SetBool("IsWalking",walking);
 
         m_Animator.SetBool("IsInAir", !grounded);
 

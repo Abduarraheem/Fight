@@ -51,7 +51,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "New action",
+                    "name": "Run",
                     "type": "Button",
                     "id": "7a17bb41-9fe6-4bcf-b823-8149bea4084d",
                     "expectedControlType": "Button",
@@ -86,7 +86,7 @@
                 {
                     "name": "",
                     "id": "ac3de8e0-a144-488f-b914-24943ed61124",
-                    "path": "<Keyboard>/shift",
+                    "path": "<Keyboard>/space",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
@@ -214,6 +214,17 @@
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "81567681-af7f-49ca-93c9-4dd2bf881fd6",
+                    "path": "<Keyboard>/shift",
+                    "interactions": "Press(behavior=2)",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Run",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }
