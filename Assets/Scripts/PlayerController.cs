@@ -31,7 +31,8 @@ public class PlayerController : MonoBehaviour
     private bool inControl;
     private bool forward;
 
-    public List<Collider> BodyParts = new List<Collider>();
+    private List<Collider> BodyParts = new List<Collider>();
+    public List<Collider> CollidingBodyParts = new List<Collider>();    // Set to public for debugging.
 
     Animator m_Animator;
     // handle all player input below //
@@ -149,6 +150,7 @@ public class PlayerController : MonoBehaviour
         SetBodyParts();
     }
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -252,5 +254,29 @@ public class PlayerController : MonoBehaviour
     {
         return Physics.CheckCapsule(cc.bounds.center, new Vector3(cc.bounds.center.x,
             cc.bounds.min.y, cc.bounds.center.z), cc.radius * .9f, groundLayers);
+    }
+
+    /* OnTriggerEnter & OnTriggerExit function for 
+    when body parts of another player are touching 
+    the current player.
+    Used to detect if a attack occurs. */
+    private void OnTriggerEnter(Collider other)
+    {
+        PlayerController control = other.transform.root.GetComponent<PlayerController>();
+        if (BodyParts.Contains(other) || control == null || other.gameObject == control.gameObject){
+            return;
+        }
+        if (!CollidingBodyParts.Contains(other)){
+            CollidingBodyParts.Add(other);
+        }
+        
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (CollidingBodyParts.Contains(other)){
+            CollidingBodyParts.Remove(other);
+        }
+        
     }
 }

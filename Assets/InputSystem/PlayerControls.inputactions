@@ -218,10 +218,21 @@
                 {
                     "name": "",
                     "id": "81567681-af7f-49ca-93c9-4dd2bf881fd6",
-                    "path": "<Keyboard>/shift",
+                    "path": "<Keyboard>/leftShift",
                     "interactions": "Press(behavior=2)",
                     "processors": "",
                     "groups": "Keyboard",
+                    "action": "Run",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0534e92f-d87e-430d-8480-9433272a8280",
+                    "path": "<Keyboard>/rightShift",
+                    "interactions": "Press(behavior=2)",
+                    "processors": "",
+                    "groups": "Player 2",
                     "action": "Run",
                     "isComposite": false,
                     "isPartOfComposite": false
