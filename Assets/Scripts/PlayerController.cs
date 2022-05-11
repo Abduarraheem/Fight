@@ -24,8 +24,9 @@ public class PlayerController : MonoBehaviour
     private bool doubleJump;
     private bool crouching;
     private bool standing;
-    private int dirFacing;
+    private float dirFacing;
     private bool inContorl;
+    private bool forward;
 
     public List<Collider> BodyParts = new List<Collider>();
 
@@ -38,13 +39,14 @@ public class PlayerController : MonoBehaviour
         Vector2 v = value.Get<Vector2>();
         if (v.x != 0 & grounded)
         {
-            dirFacing *= -1;
-            Quaternion deltaRotation = Quaternion.Euler(new Vector3(0, 180 - 90 * v.x, 0));
-            rb.rotation = deltaRotation;
-            
+          dirFacing = v.x;
         }
-        movementX = v.x;
-        movementY = v.y;
+            
+            
+            
+        
+    movementX = v.x;
+    movementY = v.y;
     }
 
     void OnJump()
@@ -64,7 +66,11 @@ public class PlayerController : MonoBehaviour
 
     void OnAtk1()
     {
-        if (!grounded & (movementX* dirFacing > 0))
+        if (!grounded & forward)
+        {
+            m_Animator.SetTrigger("IsAttack");
+        }
+        else if (!grounded & !forward)
         {
             m_Animator.SetTrigger("IsAttack");
         }
@@ -142,6 +148,8 @@ public class PlayerController : MonoBehaviour
         // TODO FIX Z position changing after facing different direction. 
         // this is a temporary hardcoded fix.
         transform.position = new Vector3(transform.position.x, transform.position.y, -0.1880001f);
+        Quaternion deltaRotation = Quaternion.Euler(new Vector3(0, 180 - 90 * dirFacing, 0));
+        rb.rotation = deltaRotation;
     }
 
     void FixedUpdate()
@@ -168,8 +176,19 @@ public class PlayerController : MonoBehaviour
 
         bool walk = movementX != 0;
         if (!grounded) walk = false;
+        if (forward = (movementX * dirFacing > 0))
+        {
+            m_Animator.SetBool("IsForward", true);
+        }
+        if (forward = (movementX * dirFacing < 0))
+        {
+            m_Animator.SetBool("IsForward", false);
+        }
 
-        
+
+
+
+
         m_Animator.SetBool("IsWalking",walk);
 
         m_Animator.SetBool("IsInAir", !grounded);
