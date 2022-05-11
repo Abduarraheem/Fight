@@ -27,6 +27,7 @@ public class PlayerController : MonoBehaviour
     private int dirFacing;
     private bool inContorl;
 
+    public List<Collider> BodyParts = new List<Collider>();
 
     Animator m_Animator;
 // handle all player input below //
@@ -85,7 +86,40 @@ public class PlayerController : MonoBehaviour
             crouching = false;
         }
     }
-// player input ends //
+    // player input ends //
+
+    /* Function that sets body parts to be triggers */
+    private void SetBodyParts()
+    {
+        Collider[] colliders = this.gameObject.GetComponentsInChildren<Collider>();
+        foreach(Collider c in colliders)
+        {
+            if (c.gameObject != this.gameObject)
+            {
+                c.isTrigger = true;
+                BodyParts.Add(c);
+            }
+        }
+    }
+
+    
+    /* Function that unsets body parts to be triggers */
+    private void TurnOnBodyParts()
+    {
+        foreach(Collider c in BodyParts)
+        {
+            if (c.gameObject != this.gameObject)
+            {
+                c.isTrigger = false;
+                BodyParts.Add(c);
+            }
+        }
+    }
+
+    void Awake()
+    {
+        SetBodyParts();
+    }
 
     // Start is called before the first frame update
     void Start()
