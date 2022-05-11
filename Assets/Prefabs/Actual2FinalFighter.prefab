@@ -3776,7 +3776,7 @@ MonoBehaviour:
     m_Bits: 1
   gravityScale: 2
   movementInAir: 1
-  RagdollParts: []
+  BodyParts: []
 --- !u!54 &7998804942064991607
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3861,7 +3861,7 @@ CapsuleCollider:
   m_Radius: 0.8
   m_Height: 6.5
   m_Direction: 1
-  m_Center: {x: 0.4, y: 3.25, z: -0.5}
+  m_Center: {x: 0, y: 3.25, z: 0}
 --- !u!1 &5041364081743942907
 GameObject:
   m_ObjectHideFlags: 0
