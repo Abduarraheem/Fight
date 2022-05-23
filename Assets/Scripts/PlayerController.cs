@@ -16,11 +16,14 @@ public class PlayerController : MonoBehaviour
     
 
     private Vector3 direction;
+    private Vector2 horizontalInput;
 	private Rigidbody rb;
 	private float movementX;
 	private float movementY;
 
 
+    private float attackTime;
+    private bool attacking;
     private bool grounded;
     private bool doubleJump;
     private bool crouching;
@@ -40,13 +43,11 @@ public class PlayerController : MonoBehaviour
     void OnMove(InputValue value)
     {
     // handle move events here - use directional but only handle for movement x
-        Vector2 v = value.Get<Vector2>();
-        if (v.x != 0 & grounded)
-        {
-          dirFacing = v.x;
-        }
-    movementX = v.x;
-    movementY = v.y;
+
+        horizontalInput = value.Get<Vector2>();
+
+    movementX = horizontalInput.x;
+    movementY = horizontalInput.y;
     }
 
     void OnRun()
@@ -73,10 +74,13 @@ public class PlayerController : MonoBehaviour
             m_Animator.SetTrigger("IsJumping");
         }
 
+
+
     }
 
     void OnAtk1()
     {
+
         if (!grounded & forward)
         {
             m_Animator.SetTrigger("IsAttack");
@@ -85,11 +89,12 @@ public class PlayerController : MonoBehaviour
         {
             m_Animator.SetTrigger("IsAttack");
         }
-        else if (grounded & crouching)
+        else if (crouching)
         {
             m_Animator.SetTrigger("IsAttack");
+            
         }
-        else if (grounded)
+        else if (grounded  & standing)
         {
             m_Animator.SetTrigger("IsAttack");
         }
@@ -97,23 +102,35 @@ public class PlayerController : MonoBehaviour
         {
             m_Animator.SetTrigger("IsAttack");
         }
+        attacking = true;
+        attackTime = .9f;
+
+
+
 
     }
 
     void OnCrouch()
     {
+        
         if (grounded & standing)
         {
             m_Animator.SetBool("IsCrouch", true);
             standing = false;
             crouching = true;
         }
+        
         else if (grounded & !standing)
         {
             m_Animator.SetBool("IsCrouch", false);
             standing = true;
             crouching = false;
         }
+        
+        
+        
+
+        
     }
     // player input ends //
 
@@ -171,6 +188,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         Quaternion deltaRotation = Quaternion.Euler(new Vector3(0, 180 - 90 * dirFacing, 0));
         rb.rotation = deltaRotation;
         
@@ -185,7 +203,7 @@ public class PlayerController : MonoBehaviour
             rb.velocity = new Vector3(0, 0, 0);
         }
 
-        if (grounded & !crouching)
+        if (grounded & !crouching & !attacking)
         {
             rb.velocity = new Vector3(speed * movementX, rb.velocity.y, 0.0f);
             doubleJump = true;
@@ -216,14 +234,32 @@ public class PlayerController : MonoBehaviour
             running = false;
         }
 
+        
+        // Changes direction if one group when recieving input
+        if (horizontalInput.x != 0 & grounded & !attacking)
+        {
+            dirFacing = horizontalInput.x;
+        }
+        
 
-
-
+        // initializes walking on input
         walking = movementX != 0;
         if (!grounded) walking = false;
         m_Animator.SetBool("IsWalking",walking);
 
+        // activate inAir animation when not grounded
         m_Animator.SetBool("IsInAir", !grounded);
+
+      
+
+        if (attackTime > 0)
+        {
+            attackTime -= Time.deltaTime;
+        }
+        else
+        {
+            attacking = false;
+        }
 
         rb.AddForce(Physics.gravity * (gravityScale - 1) * rb.mass);
 
