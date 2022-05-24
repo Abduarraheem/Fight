@@ -13,7 +13,12 @@ public class PlayerController : MonoBehaviour
     public float movementInAir = 3.0f;
     public CapsuleCollider cc;
     public LayerMask groundLayers;
-    
+
+    private AudioSource walking_audio;
+    private AudioSource attacking_audio;
+
+
+
 
     private Vector3 direction;
     private Vector2 horizontalInput;
@@ -102,8 +107,13 @@ public class PlayerController : MonoBehaviour
         {
             m_Animator.SetTrigger("IsAttack");
         }
+
+        if (attacking == false){
+            attacking_audio.PlayDelayed(.3f);
+        }
         attacking = true;
         attackTime = .9f;
+
 
 
 
@@ -171,9 +181,16 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-		rb = GetComponent<Rigidbody>();
+        AudioSource[] audios = GetComponents<AudioSource>();
+        walking_audio = audios[0];
+        attacking_audio = audios[1];
+
+        rb = GetComponent<Rigidbody>();
         m_Animator = GetComponent<Animator>();
         cc = GetComponent<CapsuleCollider>();
+
+        
+
 
 
         standing = true;
@@ -260,6 +277,24 @@ public class PlayerController : MonoBehaviour
         {
             attacking = false;
         }
+
+        //sound for walking
+        if (walking)
+        {
+            if (!walking_audio.isPlaying)
+            {
+                walking_audio.Play();
+            }
+        }
+        else
+        {
+            walking_audio.Stop();
+        }
+
+
+
+
+
 
         rb.AddForce(Physics.gravity * (gravityScale - 1) * rb.mass);
 

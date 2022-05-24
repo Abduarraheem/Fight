@@ -707,7 +707,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: metarig|punch
-  m_Speed: 4
+  m_Speed: 1.4
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 559371995104237125}
@@ -720,8 +720,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: -5149128733256851613, guid: 427f2cd8b74f61f4397c69afa5f64a5a,
-    type: 3}
+  m_Motion: {fileID: 7400000, guid: cda5bd552c85fa24c97769edbf40c5aa, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
