@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     public float movementInAir = 3.0f;
     public CapsuleCollider cc;
     public LayerMask groundLayers;
+    public HealthBar healthBar;
 
     private AudioSource walking_audio;
     private AudioSource attacking_audio;
@@ -216,7 +217,7 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        
+        healthBar.setHealth(health/100.0f);
         if (transform.position.y < -2)
         {
             rb.position = new Vector3(0, 2, 0);
