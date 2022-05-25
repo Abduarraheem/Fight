@@ -18,6 +18,9 @@ public class PlayerController : MonoBehaviour
     private AudioSource walking_audio;
     private AudioSource attacking_audio;
 
+    private float normSpeed;
+    private float runSpeed;
+
 
 
 
@@ -64,13 +67,14 @@ public class PlayerController : MonoBehaviour
         {
             m_Animator.SetBool("IsRunning", true);
             running = true;
+            speed = runSpeed;
         }
 
     }
 
     void OnJump()
     {
-        if (grounded & standing)
+        if (grounded & (standing | running))
         {
             rb.velocity = new Vector3(rb.velocity.x, jumpSpeed, rb.velocity.z);
             m_Animator.SetTrigger("IsJumping");
@@ -89,36 +93,38 @@ public class PlayerController : MonoBehaviour
     void OnAtk1()
     {
 
+        if (attacking == false)
+        {
+            attacking_audio.PlayDelayed(.3f);
+        }
+
+
         if (!grounded & forward)
         {
             m_Animator.SetTrigger("IsAttack");
+            attacking = true; attackTime = .9f;
         }
         else if (!grounded & !forward)
         {
             m_Animator.SetTrigger("IsAttack");
+            attacking = true; attackTime = .9f;
         }
         else if (crouching)
         {
             m_Animator.SetTrigger("IsAttack");
-            
+            attacking = true; attackTime = .5f;
+
         }
-        else if (grounded  & standing)
+        else if (grounded & standing & !running)
         {
             m_Animator.SetTrigger("IsAttack");
+            attacking = true; attackTime = .5f;
         }
-        else if (grounded & walking)
+        else if (grounded & walking & !running)
         {
             m_Animator.SetTrigger("IsAttack");
+            attacking = true; attackTime = .5f;
         }
-
-        if (attacking == false){
-            attacking_audio.PlayDelayed(.3f);
-        }
-        attacking = true;
-        attackTime = .5f;
-
-
-
 
 
     }
@@ -185,6 +191,9 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        normSpeed = speed;
+        runSpeed = (speed * 2.5f);
+
         AudioSource[] audios = GetComponents<AudioSource>();
         walking_audio = audios[0];
         attacking_audio = audios[1];
@@ -253,6 +262,7 @@ public class PlayerController : MonoBehaviour
         {
             m_Animator.SetBool("IsRunning", false);
             running = false;
+            speed = normSpeed;
         }
 
         
