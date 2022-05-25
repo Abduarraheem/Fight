@@ -42,6 +42,8 @@ public class PlayerController : MonoBehaviour
     private List<Collider> BodyParts = new List<Collider>();
     public List<Collider> CollidingBodyParts = new List<Collider>();    // Set to public for debugging.
 
+    public float health = 100.0f;
+
     Animator m_Animator;
     // handle all player input below //
 
@@ -112,7 +114,7 @@ public class PlayerController : MonoBehaviour
             attacking_audio.PlayDelayed(.3f);
         }
         attacking = true;
-        attackTime = .9f;
+        attackTime = .5f;
 
 
 
@@ -136,7 +138,8 @@ public class PlayerController : MonoBehaviour
             standing = true;
             crouching = false;
         }
-        
+
+        // PlayerController control = other.transform.root.GetComponent<PlayerController>();
         
         
 
@@ -339,6 +342,11 @@ public class PlayerController : MonoBehaviour
         }
         if (!CollidingBodyParts.Contains(other)){
             CollidingBodyParts.Add(other);
+            if (control.IsAttacking() && other.GetComponent<Collider>().gameObject.name == "hand.R")
+            {
+                health -= 5;
+                Debug.Log(health);
+            }
         }
         
     }
@@ -349,5 +357,10 @@ public class PlayerController : MonoBehaviour
             CollidingBodyParts.Remove(other);
         }
         
+    }
+
+    public bool IsAttacking()
+    {
+        return attacking;
     }
 }
