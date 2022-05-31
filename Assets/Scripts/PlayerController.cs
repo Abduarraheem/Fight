@@ -17,6 +17,13 @@ public class PlayerController : MonoBehaviour
 
     private AudioSource walking_audio;
     private AudioSource attacking_audio;
+    public ParticleSystem jumpCloud;
+
+    public ParticleSystem rHand;
+    public ParticleSystem lHand;
+    public ParticleSystem rFoot;
+    public ParticleSystem lFoot;
+
 
     private float normSpeed;
     private float runSpeed;
@@ -78,13 +85,18 @@ public class PlayerController : MonoBehaviour
         {
             rb.velocity = new Vector3(rb.velocity.x, jumpSpeed, rb.velocity.z);
             m_Animator.SetTrigger("IsJumping");
+            jumpCloud.Play(false);
+
         }
         if (!grounded & doubleJump)
         {
             rb.velocity = new Vector3(rb.velocity.x, jumpSpeed, rb.velocity.z);
             doubleJump = false;
             m_Animator.SetTrigger("IsJumping");
+            jumpCloud.Play(false);
+
         }
+
 
 
 
@@ -92,6 +104,8 @@ public class PlayerController : MonoBehaviour
 
     void OnAtk1()
     {
+
+
 
         if (attacking == false)
         {
@@ -202,7 +216,17 @@ public class PlayerController : MonoBehaviour
         m_Animator = GetComponent<Animator>();
         cc = GetComponent<CapsuleCollider>();
 
-        
+        jumpCloud = GetComponent<ParticleSystem>();
+        rHand.GetComponent<ParticleSystem>().enableEmission = false;
+        lHand.GetComponent<ParticleSystem>().enableEmission = false;
+        rFoot.GetComponent<ParticleSystem>().enableEmission = false;
+        lFoot.GetComponent<ParticleSystem>().enableEmission = false;
+
+
+
+
+
+
 
 
 
@@ -286,10 +310,19 @@ public class PlayerController : MonoBehaviour
         if (attackTime > 0)
         {
             attackTime -= Time.deltaTime;
+            jumpCloud.enableEmission = false;
+
         }
         else
         {
             attacking = false;
+            jumpCloud.enableEmission = true;
+            rHand.enableEmission = true;
+            lHand.enableEmission = true;
+            rFoot.enableEmission = true;
+            lFoot.enableEmission = true;
+
+
         }
 
         //sound for walking
@@ -306,7 +339,7 @@ public class PlayerController : MonoBehaviour
         }
 
 
-
+        
 
 
 
@@ -357,6 +390,10 @@ public class PlayerController : MonoBehaviour
             {
                 health -= 5;
                 Debug.Log(health);
+                control.rHand.enableEmission = true;
+                control.rHand.Play();
+
+
             }
         }
         
