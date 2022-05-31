@@ -58,6 +58,7 @@ public class PlayerController : MonoBehaviour
     public float health = 100.0f;
 
     Animator m_Animator;
+    private string attackBodyPart;
     // handle all player input below //
 
     void OnMove(InputValue value)
@@ -118,12 +119,14 @@ public class PlayerController : MonoBehaviour
         {
             m_Animator.SetTrigger("IsAttack");
             attacking = true; attackTime = .9f;
+            // attackBodyPart =
         }
 
         if (running)
         {
             m_Animator.SetTrigger("IsAttack");
             attacking = true; attackTime = .9f;
+            // attackBodyPart =
         }
 
 
@@ -131,27 +134,33 @@ public class PlayerController : MonoBehaviour
         {
             m_Animator.SetTrigger("IsAttack");
             attacking = true; attackTime = .9f;
+            // attackBodyPart =
+            
         }
         else if (!grounded & !forward)
         {
             m_Animator.SetTrigger("IsAttack");
             attacking = true; attackTime = .9f;
+            // attackBodyPart =
         }
         else if (crouching)
         {
             m_Animator.SetTrigger("IsAttack");
             attacking = true; attackTime = .5f;
+            // attackBodyPart =
 
         }
         else if (grounded & standing & !running)
         {
             m_Animator.SetTrigger("IsAttack");
             attacking = true; attackTime = .5f;
+            // attackBodyPart =
         }
         else if (grounded & walking & !running)
         {
             m_Animator.SetTrigger("IsAttack");
             attacking = true; attackTime = .5f;
+            // attackBodyPart =
         }
 
 
