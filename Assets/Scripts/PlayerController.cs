@@ -49,6 +49,8 @@ public class PlayerController : MonoBehaviour
     private float dirFacing;
     private bool inControl;
     private bool forward;
+    private bool isUp;
+    private bool isDown;
 
     private List<Collider> BodyParts = new List<Collider>();
     public List<Collider> CollidingBodyParts = new List<Collider>();    // Set to public for debugging.
@@ -110,6 +112,18 @@ public class PlayerController : MonoBehaviour
         if (attacking == false)
         {
             attacking_audio.PlayDelayed(.3f);
+        }
+        // isUp not currently working :(
+        if (isUp & !grounded)
+        {
+            m_Animator.SetTrigger("IsAttack");
+            attacking = true; attackTime = .9f;
+        }
+
+        if (running)
+        {
+            m_Animator.SetTrigger("IsAttack");
+            attacking = true; attackTime = .9f;
         }
 
 
@@ -217,7 +231,8 @@ public class PlayerController : MonoBehaviour
         cc = GetComponent<CapsuleCollider>();
 
         jumpCloud = GetComponent<ParticleSystem>();
-        rHand.GetComponent<ParticleSystem>().enableEmission = false;
+        //dont use .emission.enabled, throws error
+        rHand.GetComponent<ParticleSystem>().enableEmission = false; 
         lHand.GetComponent<ParticleSystem>().enableEmission = false;
         rFoot.GetComponent<ParticleSystem>().enableEmission = false;
         lFoot.GetComponent<ParticleSystem>().enableEmission = false;
@@ -297,6 +312,30 @@ public class PlayerController : MonoBehaviour
         }
         
 
+        //attempting to use movement up for upair, but is always false
+        if (movementY > 0f)
+        {
+            isUp = true;
+            m_Animator.SetBool("IsUp", true);
+        }
+        else
+        {
+            isUp = false;
+            m_Animator.SetBool("IsUp", false);
+        }
+        if (movementY < 0f)
+        {
+            isDown = true;
+            m_Animator.SetBool("IsDown", true);
+
+        }
+        else
+        {
+            isDown = false;
+            m_Animator.SetBool("IsDown", false);
+        }
+
+
         // initializes walking on input
         walking = movementX != 0;
         if (!grounded) walking = false;
@@ -315,12 +354,13 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            attacking = false;
             jumpCloud.enableEmission = true;
-            rHand.enableEmission = true;
-            lHand.enableEmission = true;
-            rFoot.enableEmission = true;
-            lFoot.enableEmission = true;
+
+            attacking = false;
+            rHand.enableEmission = false;
+            lHand.enableEmission = false;
+            rFoot.enableEmission = false;
+            lFoot.enableEmission = false;
 
 
         }
