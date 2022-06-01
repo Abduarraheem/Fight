@@ -459,8 +459,7 @@ public class PlayerController : MonoBehaviour
                 Debug.Log(health);
                 control.rHand.enableEmission = true;
                 control.rHand.Play();
-
-
+                rb.AddForce(new Vector3(2 * (control.GetFacingDir()), 1, 0) * (100/health) * 35);
             }
         }
         
@@ -487,5 +486,9 @@ public class PlayerController : MonoBehaviour
     public float DamageToGive()
     {
         return damage;
+    }
+    public float GetFacingDir()
+    {
+        return dirFacing;
     }
 }
