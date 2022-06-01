@@ -56,9 +56,11 @@ public class PlayerController : MonoBehaviour
     public List<Collider> CollidingBodyParts = new List<Collider>();    // Set to public for debugging.
 
     public float health = 100.0f;
+    private float damage;
 
     Animator m_Animator;
     private string attackBodyPart;
+
     // handle all player input below //
 
     void OnMove(InputValue value)
@@ -120,7 +122,8 @@ public class PlayerController : MonoBehaviour
             //ideally up air, both feet
             m_Animator.SetTrigger("IsAttack");
             attacking = true; attackTime = .9f;
-            // attackBodyPart =
+            attackBodyPart = "shin.L";
+            damage = 10;
         }
 
         if (running)
@@ -128,7 +131,8 @@ public class PlayerController : MonoBehaviour
             //Charge attack left knee
             m_Animator.SetTrigger("IsAttack");
             attacking = true; attackTime = .9f;
-            // attackBodyPart =
+            attackBodyPart = "shin.L";
+            damage = 10;
         }
 
 
@@ -137,7 +141,8 @@ public class PlayerController : MonoBehaviour
             // forward air right hand
             m_Animator.SetTrigger("IsAttack");
             attacking = true; attackTime = .9f;
-            // attackBodyPart =
+            attackBodyPart = "hand.R";
+            damage = 5;
             
         }
  
@@ -145,14 +150,16 @@ public class PlayerController : MonoBehaviour
         {
             m_Animator.SetTrigger("IsAttack");
             attacking = true; attackTime = .9f;
-            // attackBodyPart =
+            attackBodyPart = "shin.L";
+            damage = 10;
         }
         else if (crouching)
         {
             //crouch attack right foot
             m_Animator.SetTrigger("IsAttack");
             attacking = true; attackTime = .5f;
-            // attackBodyPart =
+            attackBodyPart = "shin.R";
+            damage = 10;
 
         }
         else if (grounded & standing & !running)
@@ -160,14 +167,16 @@ public class PlayerController : MonoBehaviour
             //punch right hand
             m_Animator.SetTrigger("IsAttack");
             attacking = true; attackTime = .5f;
-            // attackBodyPart =
+            attackBodyPart = "hand.R";
+            damage = 5;
         }
         else if (grounded & walking & !running)
         {
             //round house left foot
             m_Animator.SetTrigger("IsAttack");
             attacking = true; attackTime = .5f;
-            // attackBodyPart =
+            attackBodyPart = "shin.L";
+            damage = 10;
         }
 
 
@@ -442,9 +451,11 @@ public class PlayerController : MonoBehaviour
         }
         if (!CollidingBodyParts.Contains(other)){
             CollidingBodyParts.Add(other);
-            if (control.IsAttacking() && other.GetComponent<Collider>().gameObject.name == "hand.R")
+            
+            Debug.Log(attackBodyPart);
+            if (control.IsAttacking() && other.GetComponent<Collider>().gameObject.name == control.GetAtckBodyPart())
             {
-                health -= 5;
+                health -= control.DamageToGive();
                 Debug.Log(health);
                 control.rHand.enableEmission = true;
                 control.rHand.Play();
@@ -466,5 +477,15 @@ public class PlayerController : MonoBehaviour
     public bool IsAttacking()
     {
         return attacking;
+    }
+
+    public string GetAtckBodyPart()
+    {
+        return attackBodyPart;
+    }
+
+    public float DamageToGive()
+    {
+        return damage;
     }
 }
