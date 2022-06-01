@@ -58,6 +58,7 @@ public class PlayerController : MonoBehaviour
     public float health = 100.0f;
 
     Animator m_Animator;
+    private string attackBodyPart;
     // handle all player input below //
 
     void OnMove(InputValue value)
@@ -119,6 +120,7 @@ public class PlayerController : MonoBehaviour
             //ideally up air, both feet
             m_Animator.SetTrigger("IsAttack");
             attacking = true; attackTime = .9f;
+            // attackBodyPart =
         }
 
         if (running)
@@ -126,6 +128,7 @@ public class PlayerController : MonoBehaviour
             //Charge attack left knee
             m_Animator.SetTrigger("IsAttack");
             attacking = true; attackTime = .9f;
+            // attackBodyPart =
         }
 
 
@@ -134,13 +137,22 @@ public class PlayerController : MonoBehaviour
             // forward air right hand
             m_Animator.SetTrigger("IsAttack");
             attacking = true; attackTime = .9f;
+            // attackBodyPart =
+            
         }
  
+        else if (!grounded & !forward)
+        {
+            m_Animator.SetTrigger("IsAttack");
+            attacking = true; attackTime = .9f;
+            // attackBodyPart =
+        }
         else if (crouching)
         {
             //crouch attack right foot
             m_Animator.SetTrigger("IsAttack");
             attacking = true; attackTime = .5f;
+            // attackBodyPart =
 
         }
         else if (grounded & standing & !running)
@@ -148,12 +160,14 @@ public class PlayerController : MonoBehaviour
             //punch right hand
             m_Animator.SetTrigger("IsAttack");
             attacking = true; attackTime = .5f;
+            // attackBodyPart =
         }
         else if (grounded & walking & !running)
         {
             //round house left foot
             m_Animator.SetTrigger("IsAttack");
             attacking = true; attackTime = .5f;
+            // attackBodyPart =
         }
 
 
