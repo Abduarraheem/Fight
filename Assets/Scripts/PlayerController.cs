@@ -116,12 +116,14 @@ public class PlayerController : MonoBehaviour
         // isUp not currently working :(
         if (isUp & !grounded)
         {
+            //ideally up air, both feet
             m_Animator.SetTrigger("IsAttack");
             attacking = true; attackTime = .9f;
         }
 
         if (running)
         {
+            //Charge attack left knee
             m_Animator.SetTrigger("IsAttack");
             attacking = true; attackTime = .9f;
         }
@@ -129,27 +131,27 @@ public class PlayerController : MonoBehaviour
 
         if (!grounded & forward)
         {
+            // forward air right hand
             m_Animator.SetTrigger("IsAttack");
             attacking = true; attackTime = .9f;
         }
-        else if (!grounded & !forward)
-        {
-            m_Animator.SetTrigger("IsAttack");
-            attacking = true; attackTime = .9f;
-        }
+ 
         else if (crouching)
         {
+            //crouch attack right foot
             m_Animator.SetTrigger("IsAttack");
             attacking = true; attackTime = .5f;
 
         }
         else if (grounded & standing & !running)
         {
+            //punch right hand
             m_Animator.SetTrigger("IsAttack");
             attacking = true; attackTime = .5f;
         }
         else if (grounded & walking & !running)
         {
+            //round house left foot
             m_Animator.SetTrigger("IsAttack");
             attacking = true; attackTime = .5f;
         }
