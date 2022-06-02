@@ -123,7 +123,7 @@ public class PlayerController : MonoBehaviour
             m_Animator.SetTrigger("IsAttack");
             attacking = true; attackTime = .9f;
             attackBodyPart = "shin.L";
-            damage = 10;
+            damage = 5;
         }
 
         if (running)
@@ -132,7 +132,7 @@ public class PlayerController : MonoBehaviour
             m_Animator.SetTrigger("IsAttack");
             attacking = true; attackTime = .9f;
             attackBodyPart = "shin.L";
-            damage = 10;
+            damage = 5;
         }
 
 
@@ -142,7 +142,7 @@ public class PlayerController : MonoBehaviour
             m_Animator.SetTrigger("IsAttack");
             attacking = true; attackTime = .9f;
             attackBodyPart = "hand.R";
-            damage = 5;
+            damage = 2;
             
         }
  
@@ -151,7 +151,7 @@ public class PlayerController : MonoBehaviour
             m_Animator.SetTrigger("IsAttack");
             attacking = true; attackTime = .9f;
             attackBodyPart = "shin.L";
-            damage = 10;
+            damage = 5;
         }
         else if (crouching)
         {
@@ -159,7 +159,7 @@ public class PlayerController : MonoBehaviour
             m_Animator.SetTrigger("IsAttack");
             attacking = true; attackTime = .5f;
             attackBodyPart = "shin.R";
-            damage = 10;
+            damage = 5;
 
         }
         else if (grounded & standing & !running)
@@ -168,7 +168,7 @@ public class PlayerController : MonoBehaviour
             m_Animator.SetTrigger("IsAttack");
             attacking = true; attackTime = .5f;
             attackBodyPart = "hand.R";
-            damage = 5;
+            damage = 2;
         }
         else if (grounded & walking & !running)
         {
@@ -176,7 +176,7 @@ public class PlayerController : MonoBehaviour
             m_Animator.SetTrigger("IsAttack");
             attacking = true; attackTime = .5f;
             attackBodyPart = "shin.L";
-            damage = 10;
+            damage = 5;
         }
 
 
@@ -459,7 +459,10 @@ public class PlayerController : MonoBehaviour
                 Debug.Log(health);
                 control.rHand.enableEmission = true;
                 control.rHand.Play();
-                rb.AddForce(new Vector3(2 * (control.GetFacingDir()), 1, 0) * (100/health) * 35);
+                float knockback =  50 - ((health / 100) * 50) + 25;
+                //float knockback = (100 - health) / health + 1;
+
+                rb.AddForce(new Vector3(2 * (control.GetFacingDir()), 2, 0) * knockback);
             }
         }
         
