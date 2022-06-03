@@ -16,6 +16,7 @@ public class Swapper : MonoBehaviour
 
 	void TaskOnClick(){
         SceneManager.LoadScene("Menu", LoadSceneMode.Single);
+        Time.timeScale = 1.0f;
 	}
 
 }
