@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.17993751, g: 0.22529405, b: 0.30670017, a: 1}
+  m_IndirectSpecularColor: {r: 0.17993367, g: 0.22528863, b: 0.30669847, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -97,8 +97,10 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
-  m_LightingSettings: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: 8ae70d707c631484cb1a96f1821d9c38,
+    type: 2}
+  m_LightingSettings: {fileID: 4890085278179872738, guid: 3187fbfb6ea748847b958ec5716da974,
+    type: 2}
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -1287,6 +1289,7 @@ GameObject:
   - component: {fileID: 1172137422}
   - component: {fileID: 1172137426}
   - component: {fileID: 1172137427}
+  - component: {fileID: 1172137428}
   m_Layer: 0
   m_Name: Stage
   m_TagString: Floor
@@ -1384,7 +1387,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 3eef97e4b7f85b343b1eaa41f023457b, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.063
+  m_Volume: 1
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -1482,6 +1485,18 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1172137428
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1172137421}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80af5811fb40ae7469ac8d3e19398040, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1229170814
 GameObject:
   m_ObjectHideFlags: 0

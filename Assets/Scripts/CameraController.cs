@@ -13,25 +13,25 @@ public class CameraController : MonoBehaviour
     void Update()
     {
         float minX = 0.0f;
-        float minZ = 0.0f;
+        float minY = 0.0f;
         float maxX = 0.0f;
-        float maxZ = 0.0f;
+        float maxY = 0.0f;
         float zoom = 0.0f;
         GameObject[] foundObjects = GameObject.FindGameObjectsWithTag("Player");
         for (int i = 0; i < foundObjects.Length; i ++)
         {
             Vector3 t = foundObjects[i].transform.position;
             if (t.x < minX) minX = t.x;
-            if (t.z < minZ) minZ = t.z;
+            if (t.y < minY) minY = t.y;
             if (t.x > maxX) maxX = t.x;
-            if (t.z > maxZ) maxZ = t.z;
+            if (t.y > maxY) maxY = t.y;
         }
         float centerX = (minX + maxX) / 2;
-        float centerZ = (minZ + maxZ) / 2;
+        float ydiff = (maxY - minY) / 2;
         float a = Math.Max(maxX - minX - 10, 0);
-        float b = Math.Max(maxZ - minZ - 10, 0);
+        float b = Math.Max(maxY - minY, 0);
         zoom = (float) Math.Sqrt(a*a + b*b);
-        cam.transform.position = new Vector3(centerX, 6.0f + centerZ, -7.0f);
+        cam.transform.position = new Vector3(centerX, 3.0f + ydiff, -7.0f);
         Vector3 FORWARD = cam.transform.TransformDirection(Vector3.forward);
         cam.transform.localPosition -= FORWARD * zoom * zoomLevel;
     }
