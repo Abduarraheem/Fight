@@ -329,6 +329,7 @@ public class PlayerController : MonoBehaviour
             Canvas canv = (Canvas)FindObjectOfType(typeof(Canvas));
             TMP_Text t = (TMP_Text)canv.transform.GetChild(0).gameObject.GetComponent<TMP_Text>();
             t.text = "Player " + (3 - playerNumber).ToString() + " wins!";
+            playercount = 0;
         }
 
         if (grounded & !crouching & !attacking)
