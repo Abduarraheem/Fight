@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System;
+using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
+    static int playercount = 0;
 
     public float speed = 10.0f;
     public float jumpSpeed = 20.0f;
@@ -14,6 +16,8 @@ public class PlayerController : MonoBehaviour
     public CapsuleCollider cc;
     public LayerMask groundLayers;
     public HealthBar healthBar;
+    public int playerNumber;
+    public GameObject winScreenPrefab;
 
     private AudioSource walking_audio;
     private AudioSource attacking_audio;
@@ -23,10 +27,13 @@ public class PlayerController : MonoBehaviour
     public ParticleSystem lHand;
     public ParticleSystem rFoot;
     public ParticleSystem lFoot;
+    public TMP_Text text;
+    public TMP_Text playertext;
 
 
     private float normSpeed;
     private float runSpeed;
+    private int stocks = 3;
 
 
 
@@ -57,6 +64,8 @@ public class PlayerController : MonoBehaviour
 
     public float health = 100.0f;
     private float damage;
+    private float knockbackMult = 1.0f;
+    private float launchAngle = 2.0f;
 
     Animator m_Animator;
     private string attackBodyPart;
@@ -109,9 +118,6 @@ public class PlayerController : MonoBehaviour
 
     void OnAtk1()
     {
-
-
-
         if (attacking == false)
         {
             attacking_audio.PlayDelayed(.3f);
@@ -123,27 +129,32 @@ public class PlayerController : MonoBehaviour
             m_Animator.SetTrigger("IsAttack");
             attacking = true; attackTime = .9f;
             attackBodyPart = "shin.L";
-            damage = 5;
+            damage = 10;
+            knockbackMult = 1.0f;
+            launchAngle = 1.0f;
+            rb.AddForce(new Vector3(2 * (this.GetFacingDir()), 1.0f, 0.0f));
         }
-
-        if (running)
+        else if (running)
         {
             //Charge attack left knee
             m_Animator.SetTrigger("IsAttack");
             attacking = true; attackTime = .9f;
             attackBodyPart = "shin.L";
-            damage = 5;
+            damage = 13;
+            knockbackMult = 2.0f;
+            launchAngle = 0.1f;
         }
 
-
-        if (!grounded & forward)
+        else if (!grounded & forward)
         {
             // forward air right hand
             m_Animator.SetTrigger("IsAttack");
             attacking = true; attackTime = .9f;
             attackBodyPart = "hand.R";
-            damage = 2;
-            
+            damage = 8;
+            knockbackMult = 1.0f;
+            launchAngle = 0.5f;
+            rb.AddForce(new Vector3(2 * (this.GetFacingDir()), 1.0f, 0.0f));
         }
  
         else if (!grounded & !forward)
@@ -151,7 +162,10 @@ public class PlayerController : MonoBehaviour
             m_Animator.SetTrigger("IsAttack");
             attacking = true; attackTime = .9f;
             attackBodyPart = "shin.L";
-            damage = 5;
+            damage = 6;
+            knockbackMult = 2.0f;
+            launchAngle = 1.0f;
+            rb.AddForce(new Vector3(2 * (this.GetFacingDir()), 1.0f, 0.0f));
         }
         else if (crouching)
         {
@@ -159,8 +173,9 @@ public class PlayerController : MonoBehaviour
             m_Animator.SetTrigger("IsAttack");
             attacking = true; attackTime = .5f;
             attackBodyPart = "shin.R";
-            damage = 5;
-
+            damage = 8;
+            knockbackMult = 1.0f;
+            launchAngle = 0.5f;
         }
         else if (grounded & standing & !running)
         {
@@ -168,7 +183,9 @@ public class PlayerController : MonoBehaviour
             m_Animator.SetTrigger("IsAttack");
             attacking = true; attackTime = .5f;
             attackBodyPart = "hand.R";
-            damage = 2;
+            damage = 6;
+            knockbackMult = 0.5f;
+            launchAngle = 0.5f;
         }
         else if (grounded & walking & !running)
         {
@@ -176,15 +193,18 @@ public class PlayerController : MonoBehaviour
             m_Animator.SetTrigger("IsAttack");
             attacking = true; attackTime = .5f;
             attackBodyPart = "shin.L";
-            damage = 5;
+            damage = 16;
+            knockbackMult = 1.5f;
+            launchAngle = 5.0f;
         }
-
 
     }
 
     void OnCrouch()
     {
-        
+
+        rb.AddForce(0.0f, -5.0f, 0.0f);
+        /*
         if (grounded & standing)
         {
             m_Animator.SetBool("IsCrouch", true);
@@ -198,6 +218,7 @@ public class PlayerController : MonoBehaviour
             standing = true;
             crouching = false;
         }
+        */
 
         // PlayerController control = other.transform.root.GetComponent<PlayerController>();
         
@@ -244,8 +265,10 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        playercount++;
+        playerNumber = playercount;
         normSpeed = speed;
-        runSpeed = (speed * 2.5f);
+        runSpeed = (speed * 1.5f);
 
         AudioSource[] audios = GetComponents<AudioSource>();
         walking_audio = audios[0];
@@ -290,11 +313,22 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
+        text.text = stocks.ToString();
+        playertext.text = "Player " + playerNumber.ToString();
         healthBar.setHealth(health/100.0f);
-        if (transform.position.y < -2)
+        if (transform.position.y < -2 || transform.position.y > 10 || health <= 0)
         {
+            stocks -= 1;
+            health = 100.0f;
             rb.position = new Vector3(0, 2, 0);
             rb.velocity = new Vector3(0, 0, 0);
+        }
+        if (stocks <= 0){
+            Time.timeScale = 0.0f;
+            Instantiate(winScreenPrefab, new Vector3(0, 0, 0), Quaternion.identity);
+            Canvas canv = (Canvas)FindObjectOfType(typeof(Canvas));
+            TMP_Text t = (TMP_Text)canv.transform.GetChild(0).gameObject.GetComponent<TMP_Text>();
+            t.text = "Player " + (3 - playerNumber).ToString() + " wins!";
         }
 
         if (grounded & !crouching & !attacking)
@@ -417,7 +451,6 @@ public class PlayerController : MonoBehaviour
     
     void OnCollisionEnter(Collision collider)
 	{
-        
 		if (collider.gameObject.CompareTag("Floor"))
 			grounded = true;
         
@@ -459,10 +492,11 @@ public class PlayerController : MonoBehaviour
                 Debug.Log(health);
                 control.rHand.enableEmission = true;
                 control.rHand.Play();
-                float knockback =  50 - ((health / 100) * 50) + 25;
+                float knockback =  (3 - 2 * health/100.0f) * 40.0f;
                 //float knockback = (100 - health) / health + 1;
-
-                rb.AddForce(new Vector3(2 * (control.GetFacingDir()), 2, 0) * knockback);
+                Debug.Log(control.GetLaunchAngle() + " " + control.GetKnockback());
+                rb.position = rb.position + new Vector3(0.0f, 0.1f, 0.0f);
+                rb.AddForce(new Vector3((control.GetFacingDir()), 5.0f * control.GetLaunchAngle(), 0) * knockback * control.GetKnockback());
             }
         }
         
@@ -494,4 +528,11 @@ public class PlayerController : MonoBehaviour
     {
         return dirFacing;
     }
+    public float GetKnockback() {
+        return knockbackMult;
+    }
+    public float GetLaunchAngle() {
+        return launchAngle;
+    }
+
 }

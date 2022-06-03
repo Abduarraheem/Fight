@@ -12,18 +12,17 @@ public class SwapScene : MonoBehaviour
     Scene scene;
     // Start is called before the first frame update
     void Start()
-    {}
+    {
+        DontDestroyOnLoad(this);
+    }
 
     // Update is called once per frame
     void Update() {
         if (slider) volume = slider.value;
-        if (SceneManager.GetActiveScene().name == "Main") {
-            Debug.Log("Enter main");
-        }
     }
 
     void onClick() {
-        DontDestroyOnLoad(this);
-        SceneManager.LoadScene("Main", LoadSceneMode.Single);
+        SceneManager.LoadScene("Stages", LoadSceneMode.Single);
     }
+
 }
